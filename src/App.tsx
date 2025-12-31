@@ -1,10 +1,10 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Users from "./pages/Users";
-import Carts from "./pages/Carts";
+import Orders from "./pages/Orders";
 import ProtectedRoute from "./routes/ProtectedRoute";
 const App = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
           path="/"
           element={
             <ProtectedRoute>
-              <Home />
+              <Dashboard />
             </ProtectedRoute>
           }
         />
@@ -44,10 +44,10 @@ const App = () => {
           }
         />
         <Route
-          path="/carts"
+          path="/orders"
           element={
             <ProtectedRoute>
-              <Carts />
+              <Orders />
             </ProtectedRoute>
           }
         />
