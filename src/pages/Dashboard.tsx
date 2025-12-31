@@ -47,7 +47,7 @@ const Dashboard = () => {
         <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
         <Card>
           <CardBody className="space-y-3 text-sm text-gray-700">
-            <p>✔ New product added: <strong>Wireless Headphones</strong></p>
+            <p>✔ New product added: <strong>Mens Cotton Jacket</strong></p>
             <p>✔ Order #1023 has been placed</p>
             <p>✔ Product <strong>Leather Wallet</strong> was updated</p>
           </CardBody>
