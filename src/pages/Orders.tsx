@@ -34,7 +34,7 @@ const Carts = () => {
   return (
     <MainLayout>
       <div className="flex justify-between items-center mb-4">
-        <PageTitle title="Carts" />
+        <PageTitle title="Orders" />
       </div>
       <Table aria-label="Carts Table" removeWrapper>
         <TableHeader>

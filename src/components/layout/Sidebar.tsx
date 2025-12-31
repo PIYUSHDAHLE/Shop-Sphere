@@ -45,7 +45,7 @@ const Sidebar = () => {
         </div>
         <nav className="flex flex-col gap-1 px-4 py-6">
           <Link className={linkClass("/")} to="/">
-            Home
+            Dashboard
           </Link>
           <Link className={linkClass("/products")} to="/products">
             Products
@@ -53,8 +53,8 @@ const Sidebar = () => {
           <Link className={linkClass("/users")} to="/users">
             Users
           </Link>
-          <Link className={linkClass("/carts")} to="/carts">
-            Carts
+          <Link className={linkClass("/orders")} to="/orders">
+            Orders
           </Link>
         </nav>
       </div>
