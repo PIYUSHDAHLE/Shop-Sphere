@@ -3,6 +3,7 @@ import { Input, Card, CardBody } from "@heroui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../store/auth.slice";
+import { Eye, EyeOff } from "lucide-react";
 import AppButton from "../components/common/AppButton";
 import { RootState, AppDispatch } from "../store";
 const Login = () => {
@@ -11,6 +12,7 @@ const Login = () => {
   const { loading, error, token } = useSelector(
     (state: RootState) => state.auth
   );
+  const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("mor_2314");
   const [password, setPassword] = useState("83r5^_");
   const handleLogin = () => {
@@ -25,12 +27,8 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Card className="w-[360px]">
         <CardBody className="space-y-4">
-          <h1 className="text-2xl font-bold text-center">
-            Shop Sphere
-          </h1>
-          <p className="text-center text-gray-500 text-sm">
-            Login to continue
-          </p>
+          <h1 className="text-2xl font-bold text-center">Shop Sphere</h1>
+          <p className="text-center text-gray-500 text-sm">Login to continue</p>
           <Input
             label="Username"
             value={username}
@@ -38,20 +36,25 @@ const Login = () => {
           />
           <Input
             label="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            endContent={
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="focus:outline-none"
+              >
+                {showPassword ? (
+                  <EyeOff className="w-4 h-4 text-gray-500" />
+                ) : (
+                  <Eye className="w-4 h-4 text-gray-500" />
+                )}
+              </button>
+            }
           />
-          {error && (
-            <p className="text-red-500 text-sm text-center">
-              {error}
-            </p>
-          )}
-          <AppButton
-            fullWidth
-            onClick={handleLogin}
-            isLoading={loading}
-          >
+          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          <AppButton fullWidth onClick={handleLogin} isLoading={loading}>
             Login
           </AppButton>
         </CardBody>
