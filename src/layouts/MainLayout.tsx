@@ -7,8 +7,8 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Sidebar />
-      <div className="ml-64 flex flex-col min-h-screen">
-        <main className="flex-1 p-6 overflow-y-auto">
+      <div className="md:ml-64 flex flex-col min-h-screen">
+        <main className="flex-1 p-4 md:p-6 overflow-y-auto pt-20 md:pt-6">
           {children}
         </main>
         <Footer />
@@ -16,5 +16,4 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     </div>
   );
 };
-
 export default MainLayout;
