@@ -67,3 +67,5 @@ It provides complete **CRUD-style management** for **Products, Users, and Carts*
 ---
 
 ## 📁 Project Structure
+<img width="1897" height="867" alt="image" src="https://github.com/user-attachments/assets/5352eff4-49bc-48c1-b36b-dc8fd3b3049c" />
+
