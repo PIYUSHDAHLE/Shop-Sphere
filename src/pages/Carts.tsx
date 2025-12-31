@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -9,7 +9,6 @@ import {
 } from "@heroui/react";
 import {
   getCarts,
-  addCart,
   deleteCart,
 } from "../api/carts.api";
 import MainLayout from "../layouts/MainLayout";
@@ -17,23 +16,16 @@ import PageTitle from "../components/common/PageTitle";
 import Loader from "../components/common/Loader";
 import AppButton from "../components/common/AppButton";
 import CartDetailsModal from "../components/Modal/CartDetailsModal";
-import AddCartModal from "../components/Modal/AddCartModal";
 const Carts = () => {
   const [carts, setCarts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCart, setSelectedCart] = useState<any>(null);
   const [openView, setOpenView] = useState(false);
-  const [openAdd, setOpenAdd] = useState(false);
   useEffect(() => {
     getCarts()
-      .then((res) => setCarts(res.data))
+      .then((res: { data: SetStateAction<any[]>; }) => setCarts(res.data))
       .finally(() => setLoading(false));
   }, []);
-  const handleAdd = async (data: any) => {
-    const res = await addCart(data);
-    setCarts((prev) => [res.data, ...prev]);
-    setOpenAdd(false);
-  };
   const handleDelete = async (id: number) => {
     await deleteCart(id);
     setCarts((prev) => prev.filter((c) => c.id !== id));
@@ -43,9 +35,6 @@ const Carts = () => {
     <MainLayout>
       <div className="flex justify-between items-center mb-4">
         <PageTitle title="Carts" />
-        <AppButton onClick={() => setOpenAdd(true)}>
-          Add Cart
-        </AppButton>
       </div>
       <Table aria-label="Carts Table" removeWrapper>
         <TableHeader>
@@ -90,11 +79,6 @@ const Carts = () => {
         open={openView}
         onClose={() => setOpenView(false)}
         cart={selectedCart}
-      />
-      <AddCartModal
-        open={openAdd}
-        onClose={() => setOpenAdd(false)}
-        onAdd={handleAdd}
       />
     </MainLayout>
   );

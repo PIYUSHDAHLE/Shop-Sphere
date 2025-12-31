@@ -13,7 +13,7 @@ const ProductDetails = () => {
   useEffect(() => {
     if (!id) return;
     getProduct(Number(id))
-      .then((res) => setProduct(res.data))
+      .then((res: { data: any; }) => setProduct(res.data))
       .finally(() => setLoading(false));
   }, [id]);
   const handleUpdate = async () => {
@@ -37,7 +37,7 @@ const ProductDetails = () => {
     <MainLayout>
       <div className="max-w-4xl mx-auto">
         <Card>
-          <CardBody className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <CardBody className="grid grid-cols-1 md:grid-cols-2 gap-6 p-10">
             <img
               src={product.image}
               alt={product.title}
@@ -47,7 +47,7 @@ const ProductDetails = () => {
               <h2 className="text-2xl font-semibold">
                 {product.title}
               </h2>
-              <Chip color="primary">{product.category}</Chip>
+              <Chip color="secondary">{product.category}</Chip>
               <p className="text-gray-600">
                 {product.description}
               </p>

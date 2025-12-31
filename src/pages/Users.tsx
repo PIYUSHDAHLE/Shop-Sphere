@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -20,7 +20,7 @@ const Users = () => {
   const [openModal, setOpenModal] = useState(false);
   useEffect(() => {
     getUsers()
-      .then((res) => setUsers(res.data))
+      .then((res: { data: SetStateAction<any[]>; }) => setUsers(res.data))
       .finally(() => setLoading(false));
   }, []);
   const handleDelete = async (id: number) => {

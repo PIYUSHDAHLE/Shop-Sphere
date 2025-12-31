@@ -1,22 +1,23 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { Input, Select, SelectItem, Card, CardBody } from "@heroui/react";
-import { Link } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import {
   getProducts,
   deleteProduct,
 } from "../api/products.api";
 import Loader from "../components/common/Loader";
 import PageTitle from "../components/common/PageTitle";
-import AppButton from "../components/common/AppButton";
 import MainLayout from "../layouts/MainLayout";
 const Products = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState<any[]>([]);
   const [filtered, setFiltered] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   useEffect(() => {
-    getProducts().then((res) => {
+    getProducts().then((res: { data: SetStateAction<any[]>; }) => {
       setProducts(res.data);
       setFiltered(res.data);
       setLoading(false);
@@ -64,27 +65,27 @@ const Products = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {filtered.map((p) => (
-          <Card key={p.id}>
-            <CardBody className="space-y-2">
+          <Card
+  key={p.id}
+  isPressable
+  onPress={() => navigate(`/products/${p.id}`)}
+>
+            <CardBody className="space-y-2 p-5 flex flex-col gap-2 justify-between">
+              <div className="flex flex-col gap-2">
               <img
                 src={p.image}
                 className="h-32 mx-auto object-contain"
-              />
+                />
               <h3 className="text-sm font-medium line-clamp-2">
                 {p.title}
               </h3>
               <p className="font-semibold">${p.price}</p>
+                </div>
               <div className="flex justify-between gap-2">
-                <Link to={`/products/${p.id}`}>
-                  <AppButton size="sm">View</AppButton>
-                </Link>
-                <AppButton
-                  size="sm"
-                  color="danger"
-                  onClick={() => handleDelete(p.id)}
-                >
-                  Delete
-                </AppButton>
+                  <MdDelete className="w-6 h-6 text-purple-800"  onClick={(e) => {
+          e.stopPropagation();
+          handleDelete(p.id);
+        }} />
               </div>
             </CardBody>
           </Card>
